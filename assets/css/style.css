@@ -15,12 +15,12 @@ body {
 }
 
 h1 {
-    color: var(--lavender-blue);
     font-size: 3rem;
+    color: var(--lavender-blue);
 }
 
 section {
-    margin: 2rem;
+    margin: 1rem;
 }
 
 .btn {
@@ -30,5 +30,5 @@ section {
 #rules {
     background-color: var(--dark-space-cadet);
     border-radius: 10px;
-    padding: 3rem;
+    padding: 1rem;
 }
