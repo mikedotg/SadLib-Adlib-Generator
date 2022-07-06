@@ -1,4 +1,34 @@
-body {
-    font-family: 'Open Sans', sans-serif;
+:root {
+    --dark-space-cadet: #1e2749;
+    --space-cadet: #273469;
+    --lavender-blue: #e4d9ff;
+    --ghost-white: #fafaff;
+    --gunmetal: #30343f;
 }
 
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 2rem auto;
+    background-color: var(--gunmetal);
+    color: var(--ghost-white);
+    width: 90%;
+}
+
+h1 {
+    color: var(--lavender-blue);
+    font-size: 3rem;
+}
+
+section {
+    margin: 2rem;
+}
+
+.btn {
+    background-color: var(--space-cadet);
+}
+
+#rules {
+    background-color: var(--dark-space-cadet);
+    border-radius: 10px;
+    padding: 3rem;
+}
