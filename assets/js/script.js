@@ -21,6 +21,7 @@ function getStory(requestUrl) {
 }
 
 function renderInputs(data) {
+    $('body').empty();
     var bodyEl = $('#body'); // grabs the body element
     var inputForm = $('<form>'); // makes a new form element
     bodyEl.append(inputForm); // appends the form element to the page
