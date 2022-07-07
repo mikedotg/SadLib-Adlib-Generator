@@ -29,6 +29,7 @@ function getStory(requestUrl) {
         return res.json();
     }).then(function(data) {
         storyData = data;
+        console.log(data);
         renderInputs();
     });
 }
@@ -44,6 +45,7 @@ function renderInputs() {
         // sets the placeholder of the input to be the needed type of the input
         blankInp.attr('placeholder', storyData.blanks[i]); 
         var randomizeBtn = $('<button>Random</button>'); // creates a new button element with the text "Random"
+        randomizeBtn.addClass('random');
         //appends the generated elements to the page
         randomizeBtn.addClass('random');
         inputForm.append(row);
@@ -110,4 +112,39 @@ function init() {
         btn.attr('data-story', savedStories[i].content);
         $('#prevStories').append(btn);
     }
+}
+
+// initializes a screen displaying the prevstory
+$('#prevStories').on('click', 'button', function(event){
+    $('body').empty();
+    var createDiv = $('<div>').addClass('divBox container col-6');
+    $('body').append(createDiv);
+    var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary');1
+
+    var prevEl = $('<p id="prevStory">').addClass('rule1');
+    $('.container').append(prevEl);
+    $('.divBox').append(resetBtn);
+    $('#prevStory').text($(event.target).attr('data-story'));
+
+})
+
+
+const wordRequest = 'https://wordsapiv1.p.mashape.com/words';
+
+inputForm.on('click','.random', function(event){
+    // var context = $(event.target).siblings('input').attr('placeholder');
+    var context = 'body part';
+    if (context === 'body part') {
+        makeRequest(wordRequest+"")
+    } else if (context === "type of liquid") {
+        makeRequest(wordRequest)
+    }
+});
+
+function makeRequest(requestUrl) {
+    fetch(requestUrl).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        console.log(data);
+    });
 }
