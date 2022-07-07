@@ -53,3 +53,7 @@ form button:hover{
     border-radius:  5px;
     color: aliceblue;
 }
+
+#modaltext {
+    color: #0d6efd;
+}
