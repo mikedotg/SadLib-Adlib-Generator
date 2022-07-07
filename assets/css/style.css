@@ -57,3 +57,7 @@ form button:hover{
 #modaltext {
     color: #0d6efd;
 }
+
+.resetBtn{
+    background-color: var(--space-cadet);
+}

@@ -58,9 +58,12 @@ function renderInputs() {
 function assembleStory(event) {
     event.preventDefault(); //stops the form from resetting
     $('body').empty(); // clears the page
+    var createDiv = $('<div>').addClass('divBox container col-6');
+    $('body').append(createDiv);
+    var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary')
 
     var storyEl = $('<p>'); // makes a new <p> element
-    
+
     //loops through the data object's arrays to concatenate the story
     //into a single paragraph and assigns that to the <p> element
     storyEl.text(storyData.value[0]);
@@ -70,6 +73,13 @@ function assembleStory(event) {
         storyEl.text(storyEl.text()+input+nextLine);
     }
     //appends the <p> element to the page
+<<<<<<< HEAD
+    $('.container').append(storyEl);
+    $('.divBox').append(resetBtn);
+}
+
+
+=======
     $('body').append(storyEl);
     //calls a function to save the completed story into localStorage
     saveStory(storyEl.text());
@@ -99,3 +109,4 @@ function init() {
         $('#prevStories').append(btn);
     }
 }
+>>>>>>> 1e52a554ba2eb3ca7ca11810124d9a7ccf9dd30e
