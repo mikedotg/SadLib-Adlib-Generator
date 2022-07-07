@@ -1,6 +1,7 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
 const wordRequest = 'https://wordsapiv1.p.rapidapi.com/words/';
 
+// API Key of WordAPI
 const options = {
 	method: 'GET',
 	headers: {
