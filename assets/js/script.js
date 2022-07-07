@@ -50,10 +50,12 @@ function renderInputs() {
         row.append(blankInp);
         row.append(randomizeBtn);
         randomizeBtn.on('click', function() {
+            var formChildren;
             event.preventDefault();
-            console.log("hi");
+            console.log("Random button is clicked");
             var randWordRequest = wordRequest + "?partOfSpeech=" + blankInp.attr('placeholder');
             console.log(randWordRequest);
+            getRandWordsReq(randWordRequest);
         })
         // randomizeBtn.on('click', function() {
       
@@ -72,16 +74,16 @@ function assembleStory(event) {
 }
 
 // function that handles the WordsAPI api request
-function getRandWordsReq(randWordRequest) {
-    fetch(randWordRequest).then(function(response) {
+function getRandWordsReq(requestUrl) {
+    fetch(requestUrl).then(function(response) {
         return response.json();
     }).then(function(data) {
         console.log(data);
+        return 
     });
 }
 
 // Need to delegate event listener 
-
 
 // function randomizeWord () {
 
