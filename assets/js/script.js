@@ -22,8 +22,6 @@ var savedStories = JSON.parse(localStorage.getItem('stories')) || [];
 
 init();
 
-
-
 startBtn.on('click', function() { //start button event listener
     //gives the variable the value inputted into the modal 
     storyLength = $('#lengthInput').val();
@@ -33,13 +31,13 @@ startBtn.on('click', function() { //start button event listener
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
 });
 
+// When random button is clicked, 
 inputForm.on('click', '.random', function(event) {
-    event.preventDefault();
-    console.log("Random button is clicked");
-    var wordPos = $(this).siblings('input').attr('placeholder'); // storing the part of speech
-    var randWordRequest = wordRequest + "?random=true?partofspeech=" + wordPos; // making request call based on part of speech
-    console.log(randWordRequest);
-    getRandWordsReq(randWordRequest); 
+    event.preventDefault(); // Stops page from refreshing
+    var input =  $(this).siblings('input'); // Grabs the input associated with this button
+    var wordPos = input.attr('placeholder'); // storing the part of speech
+    var randWordRequest = wordRequest + "?random=true&partOfSpeech=" + wordPos; // making request call based on part of speech
+    getRandomWord(randWordRequest, input);
 })
 
 submitBtn.on('click', assembleStory);
@@ -54,14 +52,12 @@ function getStory(requestUrl) {
     });
 }
 
-// function that handles the WordsAPI api request
-function getRandWordsReq(requestUrl) {
-    console.log("getRandWordsReq called");
+// function that handles the WordsAPI api request and setting the input's value
+function getRandomWord(requestUrl, input) {
     fetch(requestUrl, options).then(function(response) {
-        console.log(response)
         return response.json();
     }).then(function(data) {
-        console.log(data.results.data[Math.floor(Math.random() * 100)]);
+        input.val(data.word); // sets the input's value
     });
 }
 
