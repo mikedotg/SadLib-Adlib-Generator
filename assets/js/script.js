@@ -73,13 +73,6 @@ function assembleStory(event) {
         storyEl.text(storyEl.text()+input+nextLine);
     }
     //appends the <p> element to the page
-<<<<<<< HEAD
-    $('.container').append(storyEl);
-    $('.divBox').append(resetBtn);
-}
-
-
-=======
     $('body').append(storyEl);
     //calls a function to save the completed story into localStorage
     saveStory(storyEl.text());
@@ -101,12 +94,18 @@ function saveStory(content) {
 
 //initializes the function by displaying the buttons that contain previous stories
 function init() {
+    // creates the label for saved stories if there is a button generated
+    if (savedStories.length > 0) {
+        var label = $('<h3>');
+        label.text("Previous Stories");
+        $('#prevStories').append(label);
+    }
+
     //loops through the list of saved stories and makes a button for each one
     for (var i = 0; i < savedStories.length; i++) {
         var btn = $('<button>');
         btn.text(savedStories[i].title+": "+savedStories[i].date);
-        btn.attr('data-story', savedstories[i]);
+        btn.attr('data-story', savedStories[i]);
         $('#prevStories').append(btn);
     }
 }
->>>>>>> 1e52a554ba2eb3ca7ca11810124d9a7ccf9dd30e
