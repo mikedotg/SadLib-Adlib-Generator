@@ -1,5 +1,5 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
-const randWordRequest = 'https://wordsapiv1.p.mashape.com/words/';
+const wordRequest = 'https://wordsapiv1.p.mashape.com/words/';
 
 var submitBtn = $('<button>Make Me a Story!</button>');
 var inputForm = $('<form>'); // makes a new form element
@@ -67,23 +67,16 @@ function getRandWordsReq(randWordRequest) {
 }
 
 // 
-randomizeBtn.on('click', function) {
-    randomizeWord(data);
-}
+randomizeBtn.on('click', function() {
+    var randWordRequest = wordRequest + "?partOfSpeech=" + blankInp.value;
+});
 
-function randomizeWord (data) {
-    // if placeholder requires this type of word
-    // grab the placeholder value and search a random word based on that
-    // 
-    if (blankInp == 'noun') {
-        rando
-    } else if (blankInp = 'verb') {
-
-    } else if (blankInp = 'adjective') {
-
-    } else if (blankInp = 'adverb') {
-
-    }
-} 
+// function randomizeWord (data) {
+//     // if placeholder requires this type of word
+//     // grab the placeholder value and search a random word based on that
+//     // grabbing verb
+//     // https://wordsapiv1.p.mashape.com/words/?partOfSpeech=verb
+//     var randWordRequest
+// } 
 
 
