@@ -5,10 +5,12 @@ var inputForm = $('<form>'); // makes a new form element
 
 var startBtn = $('#start');
 
-var storyLength = 10;
+var storyLength;
 var storyData;
 
 startBtn.on('click', function() { //start button event listener
+    //gives the variable the value inputted into the modal 
+    storyLength = $('#lengthInput').val(); 
     //fills in required content for requestUrl
     var requestUrl = storyRequest+'?minlength='+storyLength+'&maxlength='+storyLength; 
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
