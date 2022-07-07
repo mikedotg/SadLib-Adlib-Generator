@@ -1,7 +1,25 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
+const wordRequest = 'https://wordsapiv1.p.rapidapi.com/words/';
+
+var bodyParts = ["head", "arm", "leg", "torso", "fingers", "index finger", "middle finger", "ring finger", "pinky", "big toe", "toes", "elbow", "eyes"]; // length 12
+var liquids = ["water", "milk", "wine", "blood", "apple juice", "orange juice", "juice" ];
+var places = ["USA", "Japan", "Canada", "South Korea", "Italy", "France", "Norway", "Mexico", "Brazil", "Australia", "Germany", "Cambodia", "China"];
+var clothing = ['shirt', 'skirt', 'pants', 'shorts', 'suit', 'high heels', 'jacket', 'hoodie', 'scarf', 'swimsuit', 'polo shirt', 'dress', 'sweater', 'socks', 'gloves', 'boots'];
+var names = ['Benton', 'Charles', 'Christy', 'Michael'];
+var animals = ['bear', 'red panda', 'wolf', 'cat', 'pitbull', 'monkey', 'rat', 'tiger', 'penguin', 'donkey', 'lion', 'shiba inu', 'corgi', 'giraffe'];
+
+// API Key of WordAPI
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '6305df614bmsh1e297ce718d1c45p1b597djsnf7ec4eaf952e',
+		'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+	}
+};
 
 var submitBtn = $('<button>Make Me a Story!</button>');
 var inputForm = $('<form>'); // makes a new form element
+
 
 var startBtn = $('#start');
 
@@ -21,6 +39,42 @@ startBtn.on('click', function() { //start button event listener
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
 });
 
+// When random button is clicked, 
+inputForm.on('click', '.random', function(event) {
+    event.preventDefault(); // Stops page from refreshing
+    var input =  $(this).siblings('input'); // Grabs the input associated with this button
+    var wordType = input.attr('placeholder'); // storing the part of speech
+    
+    // if word type is not a part of speech, consider if conditions
+    if (wordType == 'body part' || wordType == 'another body part' || wordType == 'part of body') {
+        input.val(Math.floor(Math.random() * (bodyParts.length-1)));
+    } else if (wordType == 'type of liquid') {
+        input.val(Math.floor(Math.random() * (liquids.length-1)));
+    } else if (wordType == 'article of clothing') {
+        input.val(Math.floor(Math.random() * (clothing.length-1)));
+    } else if (wordType == 'named') {
+        input.val(Math.floor(Math.random() * (names.length-1)));
+    } else if (wordType == 'animals' || wordType == 'animal') {
+        input.val(Math.floor(Math.random() * (animals.length-1)));
+    } else if (wordType == 'place' || wordType == 'foreign country' || wordType == 'noun; place') {
+        input.val(Math.floor(Math.random() * (places.length-1)));
+    } else if (wordType == 'number') {
+        input.val(Math.floor(Math.random() * 100));
+    } else {
+        if (wordType == 'plural noun' || wordType == 'nouns' || wordType == 'plural noun; type of job') {
+            wordType = 'noun';
+        }
+        if (wordType == 'verb ending in -ing' || wordType == 'verb ending in ing' || wordType == 'verb ending \'ing\'' || wordType == 'past tense verb') {
+            wordType = 'verb';
+        }
+        if (wordType == 'adjective ending in -est') {
+            wordType = 'adjective';
+        }
+        var randWordRequest = wordRequest + "?random=true&partOfSpeech=" + wordType; // making request call based on part of speech
+        getRandomWord(randWordRequest, input);
+    }
+})
+
 submitBtn.on('click', assembleStory);
 
 //function that handles the madLibz api request
@@ -30,6 +84,15 @@ function getStory(requestUrl) {
     }).then(function(data) {
         storyData = data;
         renderInputs();
+    });
+}
+
+// function that handles the WordsAPI api request and setting the input's value
+function getRandomWord(requestUrl, input) {
+    fetch(requestUrl, options).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        input.val(data.word); // sets the input's value
     });
 }
 
@@ -44,6 +107,8 @@ function renderInputs() {
         // sets the placeholder of the input to be the needed type of the input
         blankInp.attr('placeholder', storyData.blanks[i]); 
         var randomizeBtn = $('<button>Random</button>'); // creates a new button element with the text "Random"
+        // console.log(randomizeBtn);
+        randomizeBtn.addClass("random");
         //appends the generated elements to the page
         inputForm.append(row);
         row.append(blankInp);
@@ -62,6 +127,7 @@ function assembleStory(event) {
     $('body').append(createDiv);
     var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary')
 
+    // //appends the <p> element to the page
     var storyEl = $('<p id="storyGen">'); // makes a new <p> element
 
     //loops through the data object's arrays to concatenate the story
@@ -75,10 +141,10 @@ function assembleStory(event) {
     //appends the <p> element to the page
     $('.container').append(storyEl);
     $('.divBox').append(resetBtn);
+
     //calls a function to save the completed story into localStorage
     saveStory(storyEl.text());
 }
-
 //saves the story to localStorage
 function saveStory(content) {
     var currTime = moment().format('M/D/YY'); //gets the current time
