@@ -66,9 +66,9 @@ function getRandWordsReq(randWordRequest) {
     });
 }
 
-// 
+// On click, the 
 randomizeBtn.on('click', function() {
-    var randWordRequest = wordRequest + "?partOfSpeech=" + blankInp.value;
+    var randWordRequest = wordRequest + "?partOfSpeech=" + $(this).siblings('input').attr('placeholder');
 });
 
 // function randomizeWord (data) {
