@@ -38,7 +38,6 @@ inputForm.on('click', '.random', function(event) {
     console.log("Random button is clicked");
     var wordPos = $(this).siblings('input').attr('placeholder'); // storing the part of speech
     var randWordRequest = wordRequest + "?random=true?partofspeech=" + wordPos; // making request call based on part of speech
-    // var randWordRequest = "https://wordsapiv1.p.mashape.com/words/chair";
     console.log(randWordRequest);
     getRandWordsReq(randWordRequest); 
 })
@@ -62,10 +61,6 @@ function getRandWordsReq(requestUrl) {
         console.log(response)
         return response.json();
     }).then(function(data) {
-        // console.log(data);
-        // console.log(data.results);
-        // console.log(data.results.data);
-        // console.log(data.results.data[99]);
         console.log(data.results.data[Math.floor(Math.random() * 100)]);
     });
 }
