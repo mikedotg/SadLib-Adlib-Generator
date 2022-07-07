@@ -1,6 +1,13 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
 const wordRequest = 'https://wordsapiv1.p.rapidapi.com/words/';
 
+var bodyParts = ["head", "arm", "leg", "torso", "fingers", "index finger", "middle finger", "ring finger", "pinky", "big toe", "toes", "elbow", "eyes"]; // length 12
+var liquids = ["water", "milk", "wine", "blood", "apple juice", "orange juice", "juice" ];
+var places = ["USA", "Japan", "Canada", "South Korea", "Italy", "France", "Norway", "Mexico", "Brazil", "Australia", "Germany", "Cambodia", "China"];
+var clothing = ['shirt', 'skirt', 'pants', 'shorts', 'suit', 'high heels', 'jacket', 'hoodie', 'scarf', 'swimsuit', 'polo shirt', 'dress', 'sweater', 'socks', 'gloves', 'boots'];
+var names = ['Benton', 'Charles', 'Christy', 'Michael'];
+var animals = ['bear', 'red panda', 'wolf', 'cat', 'pitbull', 'monkey', 'rat', 'tiger', 'penguin', 'donkey', 'lion', 'shiba inu', 'corgi', 'giraffe'];
+
 // API Key of WordAPI
 const options = {
 	method: 'GET',
@@ -36,9 +43,36 @@ startBtn.on('click', function() { //start button event listener
 inputForm.on('click', '.random', function(event) {
     event.preventDefault(); // Stops page from refreshing
     var input =  $(this).siblings('input'); // Grabs the input associated with this button
-    var wordPos = input.attr('placeholder'); // storing the part of speech
-    var randWordRequest = wordRequest + "?random=true&partOfSpeech=" + wordPos; // making request call based on part of speech
-    getRandomWord(randWordRequest, input);
+    var wordType = input.attr('placeholder'); // storing the part of speech
+    
+    // if word type is not a part of speech, consider if conditions
+    if (wordType == 'body part' || wordType == 'another body part' || wordType == 'part of body') {
+        input.val(Math.floor(Math.random() * (bodyParts.length-1)));
+    } else if (wordType == 'type of liquid') {
+        input.val(Math.floor(Math.random() * (liquids.length-1)));
+    } else if (wordType == 'article of clothing') {
+        input.val(Math.floor(Math.random() * (clothing.length-1)));
+    } else if (wordType == 'named') {
+        input.val(Math.floor(Math.random() * (names.length-1)));
+    } else if (wordType == 'animals' || wordType == 'animal') {
+        input.val(Math.floor(Math.random() * (animals.length-1)));
+    } else if (wordType == 'place' || wordType == 'foreign country' || wordType == 'noun; place') {
+        input.val(Math.floor(Math.random() * (places.length-1)));
+    } else if (wordType == 'number') {
+        input.val(Math.floor(Math.random() * 100));
+    } else {
+        if (wordType == 'plural noun' || wordType == 'nouns' || wordType == 'plural noun; type of job') {
+            wordType = 'noun';
+        }
+        if (wordType == 'verb ending in -ing' || wordType == 'verb ending in ing' || wordType == 'verb ending \'ing\'' || wordType == 'past tense verb') {
+            wordType = 'verb';
+        }
+        if (wordType == 'adjective ending in -est') {
+            wordType = 'adjective';
+        }
+        var randWordRequest = wordRequest + "?random=true&partOfSpeech=" + wordType; // making request call based on part of speech
+        getRandomWord(randWordRequest, input);
+    }
 })
 
 submitBtn.on('click', assembleStory);
@@ -93,10 +127,7 @@ function assembleStory(event) {
     $('body').append(createDiv);
     var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary')
 
-}
-
     // //appends the <p> element to the page
-    // $('body').append(storyEl); WAS THIS HERE?
     var storyEl = $('<p id="storyGen">'); // makes a new <p> element
 
     //loops through the data object's arrays to concatenate the story
@@ -110,9 +141,10 @@ function assembleStory(event) {
     //appends the <p> element to the page
     $('.container').append(storyEl);
     $('.divBox').append(resetBtn);
+
     //calls a function to save the completed story into localStorage
     saveStory(storyEl.text());
-
+}
 //saves the story to localStorage
 function saveStory(content) {
     var currTime = moment().format('M/D/YY'); //gets the current time
