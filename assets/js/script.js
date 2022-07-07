@@ -62,7 +62,7 @@ function assembleStory(event) {
     $('body').append(createDiv);
     var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary')
 
-    var storyEl = $('<p>'); // makes a new <p> element
+    var storyEl = $('<p id="storyGen">'); // makes a new <p> element
 
     //loops through the data object's arrays to concatenate the story
     //into a single paragraph and assigns that to the <p> element
