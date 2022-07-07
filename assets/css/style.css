@@ -39,3 +39,17 @@ form{
     flex-direction: column;
     align-items: center;
 }
+
+form button {
+    background-color: var(--space-cadet);
+    border: solid 1px #0d6efd;
+    border-radius:  5px;
+    color: aliceblue;
+}
+
+form button:hover{
+    background-color: #0d6efd;
+    border: solid 1px #0d6efd;
+    border-radius:  5px;
+    color: aliceblue;
+}
