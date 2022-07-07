@@ -1,11 +1,15 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
+const randWordRequest = 'https://wordsapiv1.p.mashape.com/words/';
 
 var submitBtn = $('<button>Make Me a Story!</button>');
 var inputForm = $('<form>'); // makes a new form element
 
+
 var startBtn = $('#start');
 
 var storyLength = 10;
+
+
 
 startBtn.on('click', function() { //start button event listener
     //fills in required content for requestUrl
@@ -52,3 +56,34 @@ function assembleStory(event) {
     $('body').empty();
 
 }
+
+// function that handles the WordsAPI api request
+function getRandWordsReq(randWordRequest) {
+    fetch(randWordRequest).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+    });
+}
+
+// 
+randomizeBtn.on('click', function) {
+    randomizeWord(data);
+}
+
+function randomizeWord (data) {
+    // if placeholder requires this type of word
+    // grab the placeholder value and search a random word based on that
+    // 
+    if (blankInp == 'noun') {
+        rando
+    } else if (blankInp = 'verb') {
+
+    } else if (blankInp = 'adjective') {
+
+    } else if (blankInp = 'adverb') {
+
+    }
+} 
+
+
