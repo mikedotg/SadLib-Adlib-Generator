@@ -62,8 +62,10 @@ form button:hover{
     background-color: var(--space-cadet);
 }
 
-#storyGen {
+#storyGen,
+.rule1 {
     background-color: var(--dark-space-cadet);
     border-radius: 10px;
     padding: 1rem;
 }
+
