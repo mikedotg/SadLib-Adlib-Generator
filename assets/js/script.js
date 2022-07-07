@@ -96,8 +96,8 @@ function assembleStory(event) {
 }
 
     // //appends the <p> element to the page
-    // $('body').append(storyEl);
-    var storyEl = $('<p>'); // makes a new <p> element
+    // $('body').append(storyEl); WAS THIS HERE?
+    var storyEl = $('<p id="storyGen">'); // makes a new <p> element
 
     //loops through the data object's arrays to concatenate the story
     //into a single paragraph and assigns that to the <p> element
@@ -140,7 +140,21 @@ function init() {
     for (var i = 0; i < savedStories.length; i++) {
         var btn = $('<button>');
         btn.text(savedStories[i].title+": "+savedStories[i].date);
-        btn.attr('data-story', savedStories[i]);
+        btn.attr('data-story', savedStories[i].content);
         $('#prevStories').append(btn);
     }
 }
+
+// initializes a screen displaying the prevstory
+$('#prevStories').on('click', 'button', function(event){
+    $('body').empty();
+    var createDiv = $('<div>').addClass('divBox container col-6');
+    $('body').append(createDiv);
+    var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary');1
+
+    var prevEl = $('<p id="prevStory">').addClass('rule1');
+    $('.container').append(prevEl);
+    $('.divBox').append(resetBtn);
+    $('#prevStory').text($(event.target).attr('data-story'));
+
+})
