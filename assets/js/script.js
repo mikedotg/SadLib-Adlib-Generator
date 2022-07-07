@@ -15,6 +15,7 @@ var storyData;
 startBtn.on('click', function() { //start button event listener
     //gives the variable the value inputted into the modal 
     storyLength = $('#lengthInput').val(); 
+    console.log(storyLength);
     //fills in required content for requestUrl
     var requestUrl = storyRequest+'?minlength='+storyLength+'&maxlength='+storyLength; 
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
@@ -48,6 +49,16 @@ function renderInputs() {
         inputForm.append(row);
         row.append(blankInp);
         row.append(randomizeBtn);
+        randomizeBtn.on('click', function() {
+            event.preventDefault();
+            console.log("hi");
+            var randWordRequest = wordRequest + "?partOfSpeech=" + blankInp.attr('placeholder');
+            console.log(randWordRequest);
+        })
+        // randomizeBtn.on('click', function() {
+      
+        // });
+
     }
 
     //appends a submit button to the buttom of the form
@@ -69,29 +80,27 @@ function getRandWordsReq(randWordRequest) {
     });
 }
 
-// On click, the 
-randomizeBtn.on('click','', function() {
-    var randWordRequest = wordRequest + "?partOfSpeech=" + $(this).siblings('input').attr('placeholder');
-});
+// Need to delegate event listener 
 
-// function randomizeWord (data) {
+
+// function randomizeWord () {
+
 //     // if placeholder requires this type of word
 //     // grab the placeholder value and search a random word based on that
 //     // grabbing verb
 //     // https://wordsapiv1.p.mashape.com/words/?partOfSpeech=verb
-//     var randWordRequest
 // } 
 
 
-    var storyEl = $('<p>'); // makes a new <p> element
+    // var storyEl = $('<p>'); // makes a new <p> element
     
-    //loops through the data object's arrays to concatenate the story
-    //into a single paragraph and assigns that to the <p> element
-    storyEl.text(storyData.value[0]);
-    for (var i = 1; i < storyData.value.length-1; i++) {
-        var input = inputForm.children().eq(i).children('input').val();
-        var nextLine = storyData.value[i];
-        storyEl.text(storyEl.text()+input+nextLine);
-    }
-    //appends the <p> element to the page
-    $('body').append(storyEl);
+    // //loops through the data object's arrays to concatenate the story
+    // //into a single paragraph and assigns that to the <p> element
+    // storyEl.text(storyData.value[0]);
+    // for (var i = 1; i < storyData.value.length-1; i++) {
+    //     var input = inputForm.children().eq(i).children('input').val();
+    //     var nextLine = storyData.value[i];
+    //     storyEl.text(storyEl.text()+input+nextLine);
+    // }
+    // //appends the <p> element to the page
+    // $('body').append(storyEl);
