@@ -45,6 +45,7 @@ function renderInputs() {
         blankInp.attr('placeholder', storyData.blanks[i]); 
         var randomizeBtn = $('<button>Random</button>'); // creates a new button element with the text "Random"
         //appends the generated elements to the page
+        randomizeBtn.addClass('random');
         inputForm.append(row);
         row.append(blankInp);
         row.append(randomizeBtn);
@@ -106,7 +107,7 @@ function init() {
     for (var i = 0; i < savedStories.length; i++) {
         var btn = $('<button>');
         btn.text(savedStories[i].title+": "+savedStories[i].date);
-        btn.attr('data-story', savedStories[i]);
+        btn.attr('data-story', savedStories[i].content);
         $('#prevStories').append(btn);
     }
 }
