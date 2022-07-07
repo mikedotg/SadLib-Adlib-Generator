@@ -73,7 +73,8 @@ function assembleStory(event) {
         storyEl.text(storyEl.text()+input+nextLine);
     }
     //appends the <p> element to the page
-    $('body').append(storyEl);
+    $('.container').append(storyEl);
+    $('.divBox').append(resetBtn);
     //calls a function to save the completed story into localStorage
     saveStory(storyEl.text());
 }
