@@ -61,7 +61,7 @@ function renderInputs() {
 function assembleStory(event) {
     event.preventDefault(); //stops the form from resetting
     $('body').empty(); // clears the page
-    var createDiv = $('<div>').addClass('divBox container col-6');
+    var createDiv = $('<form>').addClass('divBox container col-6');
     $('body').append(createDiv);
     var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary')
 
@@ -117,7 +117,7 @@ function init() {
 // initializes a screen displaying the prevstory
 $('#prevStories').on('click', 'button', function(event){
     $('body').empty();
-    var createDiv = $('<div>').addClass('divBox container col-6');
+    var createDiv = $('<form>').addClass(' divBox container col-6');
     $('body').append(createDiv);
     var resetBtn = $('<button>ResetBtn</button>').addClass('resetBtn btn btn-primary');1
 
