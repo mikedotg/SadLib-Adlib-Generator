@@ -1,31 +1,41 @@
-<!-- unique name -->
 # sadLibs
-This will be project1 for group4
-<!-- description -->
-The idea of this project, is to create a satirical version of an ad lib creator.
+The idea of this project, is to create a satirical version of an ad lib creator. The target audience is you, the person seeking entertainment. 
 
-The target audience is you, the person seeking entertainment. sadLibs works by 
+## How To Play sadLibs
+1. Click on the __start__ button. (Figure 1)
+2. Enter a desired number that's _10 or higher_, so the story can generate inputs based on the given number. (Figure 2)
+3. Adlib with the given blanks (enter whatever word that corresponds with the place holder), or click on the random button to generate a random adlib. (Figure 3)
+4. Click on __Make A Story For Me!__ button to see the story.
+5. Enjoy reading the adlib story.
 
-first allowing the user to select how many blanks they would like to adlib in 
+**Note**: sadLibs can be great content that encourages kids to be creative. Read the story and send it to someone for a laugh or if you need a nice, fun way to give a bedtime story. 
 
-their given story. Once decided, the user has the option of adlibbing the given 
+## Programming Languages And APIs Used
+* HTML
+* CSS + Bootstrap
+* JavaScript
+* [Madlibz API](https://madlibz.herokuapp.com/api)
+* [WordsAPI](https://www.wordsapi.com/docs/#introduction)
 
-blanks or clicking the random button until they find a word they like. Once all
+## How sadLibs Looks
+Figure 1: This is what user will see first when they launch sadLibs. They can also see their previous story has been saved. (If they did not make a story before, the previous stories section will not appear.)
 
-blanks are adlibbed, prepare for storytime!! sadLibs can be great content that 
+![Beginning](./assets/images/first-page.jpg)
 
-encourages kids to be creative and read, send to someone for a laugh or if you 
+Figure 2: Once user clicks on the start button. they receive this.
 
-need a nice, fun way to give a bedtime story. 
+![Modal](./assets/images/modal.jpg)
+
+Figure 3: Adlib time!
+![Adlib Time](./assets/images/user-input.jpg)
+
+Figure 4: How the story is displayed.
+![Story](./assets/images/story-page.jpg)
 
 
-Enjoy!
-<!-- technologies used -->
-The technologies used to create sadLibs include the programming languages HTML,
 
-CSS (including Bootstrap), and Javascript. The APIS used include Madlibz API and
-
- . Links below.
-<!-- screenshot -->
-
-<!-- link -->
+## How To Deploy sadLibs
+1. Click [here](https://github.com/mike-gonz0/sadLibs) to go to the respository on GitHub.
+2. Clone it to your computer.
+3. Find the `index.html` in the `sadLibs` directory.
+4. Then run the `index.html` to see the sadLibs website, which should look like [this](https://mike-gonz0.github.io/sadLibs/).
