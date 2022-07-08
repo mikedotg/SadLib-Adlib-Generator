@@ -1,4 +1,11 @@
 const storyRequest = 'http://madlibz.herokuapp.com/api/random';
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': '',
+        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+    }
+};
 
 var submitBtn = $('<button>Make Me a Story!</button>');
 var inputForm = $('<form>'); // makes a new form element
@@ -17,7 +24,7 @@ startBtn.on('click', function() { //start button event listener
     storyLength = $('#lengthInput').val();
     if (storyLength < 10) storyLength = 10;
     //fills in required content for requestUrl
-    var requestUrl = storyRequest+'?minlength='+storyLength+'&maxlength='+storyLength; 
+    var requestUrl = storyRequest+'?minlength=10&maxlength='+storyLength; 
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
 });
 
@@ -39,7 +46,7 @@ function renderInputs() {
     $('body').empty();
     var bodyEl = $('#body'); // grabs the body element
     bodyEl.append(inputForm); // appends the form element to the page
-    for (var i = 0; i < storyLength; i++) { // makes an input for the number of branches 
+    for (var i = 0; i < storyData.blanks.length; i++) { // makes an input for the number of branches 
         var row = $('<div>'); // makes a creates a new div
         var blankInp = $('<input>'); // creates a new input element
         // sets the placeholder of the input to be the needed type of the input
@@ -129,20 +136,44 @@ $('#prevStories').on('click', 'button', function(event){
 })
 
 
-const wordRequest = 'https://wordsapiv1.p.mashape.com/words';
+const wordRequest = 'https://wordsapiv1.p.mashape.com/words/';
 
 inputForm.on('click','.random', function(event){
+    event.preventDefault();
     // var context = $(event.target).siblings('input').attr('placeholder');
-    var context = 'body part';
-    if (context === 'body part') {
-        makeRequest(wordRequest+"")
+    var context = 'noun';
+
+    if (context === 'body part' || context === 'another body part' || context === 'part of body') {
+        
     } else if (context === "type of liquid") {
-        makeRequest(wordRequest)
+        
+    } else if (context === "adjective ending in -est") {
+        
+    } else if (context === "plural noun" || context === "nouns") {
+
+    } else if (context === "verb ending in -ing" || context === "verb ending in ing" || context === "verb ending in 'ing'") {
+
+    } else if (context === "past tense verb") {
+
+    } else if (context === 'place' || context === 'noun; place' || context === 'foreign country') {
+
+    } else if (context === "animal" || context === "animals") {
+
+    } else if (context === "name") {
+
+    } else if (context === "article of clothing") {
+
+    } else if (context === "plural noun; type of job") {
+
+    } else if (context === 'number') {
+
+    } else {
+        makeRequest(wordRequest+"?random=true&partOfSpeech="+context);
     }
 });
 
 function makeRequest(requestUrl) {
-    fetch(requestUrl).then(function(res) {
+    fetch(requestUrl, options).then(function(res) {
         return res.json();
     }).then(function(data) {
         console.log(data);
