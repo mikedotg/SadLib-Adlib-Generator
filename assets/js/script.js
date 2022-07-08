@@ -35,7 +35,7 @@ startBtn.on('click', function() { //start button event listener
     storyLength = $('#lengthInput').val();
     if (storyLength < 10) storyLength = 10;
     //fills in required content for requestUrl
-    var requestUrl = storyRequest+'?minlength='+storyLength+'&maxlength='+storyLength; 
+    var requestUrl = storyRequest+'?minlength=10&maxlength='+storyLength; 
     getStory(requestUrl); // sends a request to the madLibz api to grab a random story
 });
 
@@ -83,6 +83,7 @@ function getStory(requestUrl) {
         return res.json();
     }).then(function(data) {
         storyData = data;
+        console.log(data);
         renderInputs();
     });
 }
@@ -101,7 +102,7 @@ function renderInputs() {
     $('body').empty();
     var bodyEl = $('#body'); // grabs the body element
     bodyEl.append(inputForm); // appends the form element to the page
-    for (var i = 0; i < storyLength; i++) { // makes an input for the number of branches 
+    for (var i = 0; i < storyData.blanks.length; i++) { // makes an input for the number of branches 
         var row = $('<div>'); // makes a creates a new div
         var blankInp = $('<input>'); // creates a new input element
         // sets the placeholder of the input to be the needed type of the input
@@ -110,6 +111,7 @@ function renderInputs() {
         // console.log(randomizeBtn);
         randomizeBtn.addClass("random");
         //appends the generated elements to the page
+        randomizeBtn.addClass('random');
         inputForm.append(row);
         row.append(blankInp);
         row.append(randomizeBtn);
