@@ -1,4 +1,4 @@
-const storyRequest = 'http://madlibz.herokuapp.com/api/random';
+const storyRequest = 'https://madlibz.herokuapp.com/api/random';
 const wordRequest = 'https://wordsapiv1.p.rapidapi.com/words/';
 
 var bodyParts = ["head", "arm", "leg", "torso", "fingers", "index finger", "middle finger", "ring finger", "pinky", "big toe", "toes", "elbow", "eyes"]; // length 12
